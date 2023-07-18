@@ -354,6 +354,7 @@ Parameters that are enabled by default have to be explicitly disabled. These (cu
 | `frametime`                        | Display frametime next to FPS text                                                    |
 | `fsr`                              | Display the status of FSR (only works in gamescope)                                   |
 | `full`                             | Enable most of the toggleable parameters (currently excludes `histogram`)             |
+| `crosshair`                        | Adds a crosshair overlay at the centre of the screen                                  |
 | `gamemode`                         | Show if GameMode is on                                                                |
 | `gamepad_battery_icon`             | Display gamepad battery percent with icon. *Enabled by default*                       |
 | `gamepad_battery`                  | Display battey of wireless gamepads (xone/xpadneo/ds4)                                |

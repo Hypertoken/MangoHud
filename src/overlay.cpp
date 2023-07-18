@@ -37,6 +37,7 @@ string gpuString,wineVersion,wineProcess;
 uint32_t deviceID;
 bool gui_open = false;
 bool fcat_open = false;
+bool cross_open = false;
 struct benchmark_stats benchmark;
 struct fps_limit fps_limit_stats {};
 ImVec2 real_font_size;
@@ -510,6 +511,8 @@ void render_mpris_metadata(const struct overlay_params& params, mutexed_metadata
 
       //ImGui::PopFont();
       ImGui::PopStyleVar();
+      
+      
    }
 }
 #endif
@@ -650,6 +653,7 @@ void render_imgui(swapchain_stats& data, struct overlay_params& params, ImVec2& 
       window_size = ImVec2(params.width, params.height);
    }
    unsigned height = io.DisplaySize.y;
+   unsigned width = io.DisplaySize.x;
    auto now = Clock::now();
 
    if (old_scale != params.font_scale) {
@@ -694,6 +698,23 @@ void render_imgui(swapchain_stats& data, struct overlay_params& params, ImVec2& 
       if((now - logger->last_log_end()) < 12s && !logger->is_active())
          render_benchmark(data, params, window_size, height, now);
    }
+
+   if (params.enabled[OVERLAY_PARAM_ENABLED_crosshair])
+     {
+       ImGui::SetNextWindowBgAlpha(0.0);
+       ImGui::SetNextWindowSize(ImVec2(width, height), ImGuiCond_Always);
+       ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
+       ImGui::Begin("Crosshair", &cross_open, ImGuiWindowFlags_NoDecoration);
+       ImVec2 horiz = ImVec2(width / 2 - (params.crosshair_size / 2), height / 2);
+       ImVec2 vert = ImVec2(width / 2, height / 2 - (params.crosshair_size / 2));
+       ImGui::GetWindowDrawList()->AddLine(horiz,
+         ImVec2(horiz.x + params.crosshair_size, horiz.y + 0),
+         params.crosshair_color, 2.0f);
+       ImGui::GetWindowDrawList()->AddLine(vert,
+         ImVec2(vert.x + 0, vert.y + params.crosshair_size),
+         params.crosshair_color, 2.0f);
+       ImGui::End();
+     }
 
    if(params.enabled[OVERLAY_PARAM_ENABLED_fcat])
      {
