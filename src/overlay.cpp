@@ -457,7 +457,7 @@ void render_mpris_metadata(const struct overlay_params& params, mutexed_metadata
    if (meta.meta.valid) {
       auto color = ImGui::ColorConvertU32ToFloat4(params.media_player_color);
       ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(8,0));
-      ImGui::Dummy(ImVec2(0.0f, 20.0f));
+      //ImGui::Dummy(ImVec2(0.0f, 20.0f));
       //ImGui::PushFont(data.font1);
 
       if (meta.ticker.needs_recalc) {
