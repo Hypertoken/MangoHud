@@ -206,7 +206,16 @@ parse_crosshair_size(const char *str)
 {
    return strtol(str, NULL, 0);
 }
-
+static uint32_t
+parse_crosshair_offset_x(const char *str)
+{
+   return strtol(str, NULL, 0);
+}
+static uint32_t
+parse_crosshair_offset_y(const char *str)
+{
+   return strtol(str, NULL, 0);
+}
 static bool
 parse_no_display(const char *str)
 {
@@ -635,6 +644,8 @@ static void set_param_defaults(struct overlay_params *params){
    params->fps_limit_method = FPS_LIMIT_METHOD_LATE;
    params->vsync = -1;
    params->gl_vsync = -2;
+   params->crosshair_offset_x = 0;
+   params->crosshair_offset_y = 0;
    params->crosshair_size = 30;
    params->crosshair_color = 0xFF0076;
    params->offset_x = 0;

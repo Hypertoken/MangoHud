@@ -705,14 +705,18 @@ void render_imgui(swapchain_stats& data, struct overlay_params& params, ImVec2& 
        ImGui::SetNextWindowSize(ImVec2(width, height), ImGuiCond_Always);
        ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
        ImGui::Begin("Crosshair", &cross_open, ImGuiWindowFlags_NoDecoration);
-       ImVec2 horiz = ImVec2(width / 2 - (params.crosshair_size / 2), height / 2);
-       ImVec2 vert = ImVec2(width / 2, height / 2 - (params.crosshair_size / 2));
+      //  ImVec2 horiz = ImVec2(width / 2 - (params.crosshair_size / 2), height / 2);
+      //  ImVec2 vert = ImVec2(width / 2, height / 2 - (params.crosshair_size / 2));
+
+       ImVec2 horiz = ImVec2(width / 2 - (params.crosshair_size / 2) + params.crosshair_offset_x, height / 2 + params.crosshair_offset_y);
+       ImVec2 vert = ImVec2(width / 2 + params.crosshair_offset_x, height / 2 - (params.crosshair_size / 2) + params.crosshair_offset_y);
+
        ImGui::GetWindowDrawList()->AddLine(horiz,
          ImVec2(horiz.x + params.crosshair_size, horiz.y + 0),
-         params.crosshair_color, 2.0f);
+         params.crosshair_color, 0.55f);
        ImGui::GetWindowDrawList()->AddLine(vert,
-         ImVec2(vert.x + 0, vert.y + params.crosshair_size),
-         params.crosshair_color, 2.0f);
+         ImVec2(vert.x, vert.y + params.crosshair_size),
+         params.crosshair_color, 0.55f);
        ImGui::End();
      }
 
